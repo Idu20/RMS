@@ -11,12 +11,27 @@ import com.rms.startup.Bean.UserBean;
 
 @Repository
 public class UserDAO {
-	
+
 	@Autowired
 	JdbcTemplate jdbcTemplate;
-	
-	public List<UserBean> getAllUser()
-	{
+
+	public List<UserBean> getAllUser() {
 		return jdbcTemplate.query("select * from User;", new BeanPropertyRowMapper<UserBean>(UserBean.class));
 	}
+
+	public void addUser(UserBean bean) {
+		jdbcTemplate.update("insert into User(MobileNumber,password,UserType) values(?,?,?)",bean.getMobileNumber(), bean.getPassword(),
+				bean.getUserType());
+	}
+	
+	public void deleteUser(String mobileNumber)
+	{
+		jdbcTemplate.update("delete from user where MobileNumber=?",mobileNumber);
+	}
+	
+	public UserBean getUser(String mobileNumber)
+	{
+		return jdbcTemplate.queryForObject("select * from User where mobileNumber=?",UserBean.class,mobileNumber);
+	}
+
 }

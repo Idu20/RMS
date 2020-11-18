@@ -14,6 +14,10 @@ public class UserBean {
 	public int getUserType() {
 		return userType;
 	}
+	@Override
+	public String toString() {
+		return "UserBean [mobileNumber=" + mobileNumber + ", password=" + password + ", userType=" + userType + "]";
+	}
 	public void setUserType(int userType) {
 		this.userType = userType;
 	}

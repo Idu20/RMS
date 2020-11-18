@@ -10,13 +10,26 @@ import com.rms.startup.DAO.UserDAO;
 
 @Service
 public class UserService {
-	
+
 	@Autowired
 	UserDAO userDAO;
-	
-	public List<UserBean> getAllUser()
-	{
+
+	public List<UserBean> getAllUser() {
 		return userDAO.getAllUser();
+	}
+
+	public void addUser(UserBean bean) {
+		userDAO.addUser(bean);
+	}
+
+	public void deleteUser(String mobileNumber)
+	{
+		userDAO.deleteUser(mobileNumber);
+	}
+	
+	public UserBean getUser(String mobileNumber)
+	{
+		return userDAO.getUser(mobileNumber);
 	}
 	
 }
