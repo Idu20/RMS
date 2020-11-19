@@ -1,9 +1,7 @@
 package com.rms.startup.Controller;
 
-import java.net.http.HttpRequest;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -31,12 +29,8 @@ public class CustomerController {
 	}
 
 	@PostMapping("/add")
-	public void addCustomer(@RequestBody CustomerBean bean,HttpServletRequest request)
+	public void addCustomer(@RequestBody CustomerBean bean)
 	{
-		System.out.println(bean);
-		System.out.println(request.getParameter("DOB"));
-		System.out.println(request.toString());
-		System.out.println(request.getParameterNames());
 		customerService.addCustomer(bean);
 	}
 	

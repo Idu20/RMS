@@ -21,7 +21,7 @@ public class CustomerDAO {
 
 	public void addCustomer(CustomerBean bean) {
 		jdbcTemplate.update("insert into customer(MobileNumber,customerName,DOB) values(?,?,?)",bean.getMobileNumber(), bean.getCustomerName(),
-				bean.getDOB());
+				bean.getDob());
 	}
 	
 	public void deleteCustomer(String mobileNumber)
