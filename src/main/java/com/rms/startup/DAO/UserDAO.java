@@ -29,7 +29,7 @@ public class UserDAO {
 	}
 
 	public UserBean getUser(String mobileNumber) {
-		return jdbcTemplate.queryForObject("select * from User where mobileNumber=?", UserBean.class, mobileNumber);
+		return jdbcTemplate.queryForObject("select * from User where mobileNumber=?", new BeanPropertyRowMapper<>(UserBean.class), mobileNumber);
 	}
 
 	public void updateUser(String mobileNumber, UserBean bean) {
