@@ -32,4 +32,9 @@ public class UserService {
 		return userDAO.getUser(mobileNumber);
 	}
 	
+	public void updateUser(String mobileNumber,UserBean bean)
+	{
+		userDAO.updateUser(mobileNumber, bean);
+	}
+	
 }

@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.rms.startup.Bean.CustomerBean;
+import com.rms.startup.Bean.UserBean;
 
 @Repository
 public class CustomerDAO {
@@ -33,4 +34,10 @@ public class CustomerDAO {
 	{
 		return jdbcTemplate.queryForObject("select * from customer where mobileNumber=?",new BeanPropertyRowMapper<>(CustomerBean.class),mobileNumber);
 	}
+	
+	public void updateCustomer(String mobileNumber, CustomerBean bean) {
+		jdbcTemplate.update("update customer set MobileNumber=?,customerName=?,DOB=? where MobileNumber=?",
+				bean.getMobileNumber(), bean.getCustomerName(), bean.getDob(), mobileNumber);
+	}
+	
 }

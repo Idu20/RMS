@@ -20,18 +20,21 @@ public class UserDAO {
 	}
 
 	public void addUser(UserBean bean) {
-		jdbcTemplate.update("insert into User(MobileNumber,password,UserType) values(?,?,?)",bean.getMobileNumber(), bean.getPassword(),
-				bean.getUserType());
+		jdbcTemplate.update("insert into User(MobileNumber,password,UserType) values(?,?,?)", bean.getMobileNumber(),
+				bean.getPassword(), bean.getUserType());
 	}
-	
-	public void deleteUser(String mobileNumber)
-	{
-		jdbcTemplate.update("delete from user where MobileNumber=?",mobileNumber);
+
+	public void deleteUser(String mobileNumber) {
+		jdbcTemplate.update("delete from user where MobileNumber=?", mobileNumber);
 	}
-	
-	public UserBean getUser(String mobileNumber)
-	{
-		return jdbcTemplate.queryForObject("select * from User where mobileNumber=?",UserBean.class,mobileNumber);
+
+	public UserBean getUser(String mobileNumber) {
+		return jdbcTemplate.queryForObject("select * from User where mobileNumber=?", UserBean.class, mobileNumber);
+	}
+
+	public void updateUser(String mobileNumber, UserBean bean) {
+		jdbcTemplate.update("update User set MobileNumber=?,password=?,UserType=? where MobileNumber=?",
+				bean.getMobileNumber(), bean.getPassword(), bean.getUserType(), mobileNumber);
 	}
 
 }

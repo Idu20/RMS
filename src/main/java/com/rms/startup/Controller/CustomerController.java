@@ -8,11 +8,13 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rms.startup.Bean.CustomerBean;
+import com.rms.startup.Bean.UserBean;
 import com.rms.startup.Service.CustomerService;
 
 @RequestMapping("/customer")
@@ -44,6 +46,12 @@ public class CustomerController {
 	public void deleteCustomer(@PathVariable String mobileNumber)
 	{
 		customerService.deleteCustomer(mobileNumber);
+	}
+	
+	@PutMapping("/update/{mobileNumber}")
+	public void updateCustomer(@RequestBody CustomerBean bean,@PathVariable String mobileNumber)
+	{
+		customerService.updateCustomer(mobileNumber, bean);
 	}
 	
 }
