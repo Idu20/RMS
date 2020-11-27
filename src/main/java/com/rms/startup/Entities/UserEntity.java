@@ -1,5 +1,7 @@
-package com.rms.startup.DAO.Entities;
+package com.rms.startup.Entities;
 
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -10,8 +12,10 @@ import com.rms.startup.Bean.UserBean;
 @Table(name="User")
 public class UserEntity {
 	@Id
+	@Column(name="mobilenumber")
 	private String mobileNumber;
 	private String password;
+	@Column(name="usertype")
 	private int userType;
 	
 	public UserEntity()
