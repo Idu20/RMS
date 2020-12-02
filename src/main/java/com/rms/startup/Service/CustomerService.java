@@ -16,7 +16,7 @@ public class CustomerService {
 	CustomerDAO customerDAO;
 
 	public List<CustomerBean> getAllCustomer() {
-		return customerDAO.getAllCustomers();
+		return customerDAO.getAllCustomer();
 	}
 
 	public void addCustomer(CustomerBean bean) {

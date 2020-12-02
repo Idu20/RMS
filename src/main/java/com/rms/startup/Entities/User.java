@@ -3,6 +3,8 @@ package com.rms.startup.Entities;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import com.rms.startup.Bean.UserBean;
+
 
 /**
  * The persistent class for the user database table.
@@ -24,6 +26,11 @@ public class User implements Serializable {
 	private Usertype usertype;
 
 	public User() {
+	}
+
+	public User(UserBean bean) {
+		this.mobileNumber = bean.getMobileNumber();
+		this.password = bean.getPassword();
 	}
 
 	public String getMobileNumber() {
@@ -48,6 +55,14 @@ public class User implements Serializable {
 
 	public void setUsertype(Usertype usertype) {
 		this.usertype = usertype;
+	}
+
+	public UserBean convertToBean() {
+		UserBean bean = new UserBean();
+		bean.setMobileNumber(this.getMobileNumber());
+		bean.setUserType(this.getUsertype().getUserTypeId());
+		bean.setPassword(this.getPassword());
+		return bean;
 	}
 
 }

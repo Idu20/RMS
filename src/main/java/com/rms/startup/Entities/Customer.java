@@ -2,6 +2,9 @@ package com.rms.startup.Entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.rms.startup.Bean.CustomerBean;
+
 import java.util.Date;
 import java.util.List;
 
@@ -32,6 +35,13 @@ public class Customer implements Serializable {
 	private List<Waitinglist> waitinglists;
 
 	public Customer() {
+	}
+
+	public Customer(CustomerBean bean) {
+		// TODO Auto-generated constructor stub
+		this.customerName = bean.getCustomerName();
+		this.dob = bean.getDob();
+		this.mobileNumber = bean.getMobileNumber();
 	}
 
 	public String getMobileNumber() {
@@ -100,6 +110,15 @@ public class Customer implements Serializable {
 		waitinglist.setCustomer(null);
 
 		return waitinglist;
+	}
+
+	public CustomerBean convertToBean() {
+		// TODO Auto-generated method stub
+		CustomerBean bean = new CustomerBean();
+		bean.setCustomerName(this.getCustomerName());
+		bean.setDob(this.getDob());
+		bean.setMobileNumber(this.getMobileNumber());
+		return bean;
 	}
 
 }

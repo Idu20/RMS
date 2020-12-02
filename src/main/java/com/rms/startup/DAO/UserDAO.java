@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.rms.startup.Bean.UserBean;
 import com.rms.startup.DAO.JPA.UserRepository;
-import com.rms.startup.Entities.UserEntity;
+import com.rms.startup.Entities.User;
 
 @Repository
 @Transactional
@@ -20,15 +20,15 @@ public class UserDAO {
 	UserRepository repo;
 
 	public List<UserBean> getAllUser() {
-		List<UserEntity> lst = repo.findAll();
+		List<User> lst = repo.findAll();
 		List<UserBean> returnLst = new ArrayList<UserBean>();
-		for (UserEntity list : lst)
+		for (User list : lst)
 			returnLst.add(list.convertToBean());
 		return returnLst;
 	}
 
 	public void addUser(UserBean bean) {
-		UserEntity u = new UserEntity(bean);
+		User u = new User(bean);
 		repo.save(u);
 	}
 

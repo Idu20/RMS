@@ -4,12 +4,13 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
 
+
 /**
  * The persistent class for the category database table.
  * 
  */
 @Entity
-@NamedQuery(name = "Category.findAll", query = "SELECT c FROM Category c")
+@NamedQuery(name="Category.findAll", query="SELECT c FROM Category c")
 public class Category implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -18,8 +19,8 @@ public class Category implements Serializable {
 
 	private String categoryName;
 
-	// bi-directional many-to-one association to Item
-	@OneToMany(mappedBy = "category")
+	//bi-directional many-to-one association to Item
+	@OneToMany(mappedBy="category")
 	private List<Item> items;
 
 	public Category() {

@@ -14,8 +14,6 @@ import javax.persistence.*;
 public class Ordereditem implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@EmbeddedId
-	private OrdereditemPK id;
 
 	private String instruction;
 
@@ -24,24 +22,18 @@ public class Ordereditem implements Serializable {
 	private int status;
 
 	//bi-directional many-to-one association to Item
+	@Id
 	@ManyToOne
-	@JoinColumn(name="ItemId")
+	@JoinColumn(name="itemId")
 	private Item item;
 
 	//bi-directional many-to-one association to Order
+	@Id
 	@ManyToOne
-	@JoinColumn(name="OrderId")
+	@JoinColumn(name="orderId")
 	private Order order;
 
 	public Ordereditem() {
-	}
-
-	public OrdereditemPK getId() {
-		return this.id;
-	}
-
-	public void setId(OrdereditemPK id) {
-		this.id = id;
 	}
 
 	public String getInstruction() {
