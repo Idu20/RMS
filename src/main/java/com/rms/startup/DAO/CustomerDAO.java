@@ -1,43 +1,47 @@
 package com.rms.startup.DAO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.rms.startup.Bean.CustomerBean;
-import com.rms.startup.Bean.UserBean;
+import com.rms.startup.DAO.JPA.CustomerRepository;
+import com.rms.startup.Entities.CustomerEntity;
 
 @Repository
 public class CustomerDAO {
 	
 	@Autowired
-	JdbcTemplate jdbcTemplate;
+	CustomerRepository repo;
 
-	public List<CustomerBean> getAllCustomers() {
-		return jdbcTemplate.query("select * from customer;", new BeanPropertyRowMapper<>(CustomerBean.class));
+	public List<CustomerBean> getAllCustomer() {
+		List<CustomerEntity> lst = repo.findAll();
+		List<CustomerBean> returnList = new ArrayList<CustomerBean>();
+		for (CustomerEntity list : lst)
+			returnList.add(list.convertToBean());
+		return returnList;
 	}
 
 	public void addCustomer(CustomerBean bean) {
-		jdbcTemplate.update("insert into customer(MobileNumber,customerName,DOB) values(?,?,?)",bean.getMobileNumber(), bean.getCustomerName(),
-				bean.getDob());
+		CustomerEntity u = new CustomerEntity(bean);
+		repo.save(u);
 	}
-	
-	public void deleteCustomer(String mobileNumber)
-	{
-		jdbcTemplate.update("delete from customer where MobileNumber=?",mobileNumber);
+
+	public void deleteCustomer(String mobileNumber) {
+		// jdbcTemplate.update("delete from user where MobileNumber=?", mobileNumber);
 	}
-	
-	public CustomerBean getCustomer(String mobileNumber)
-	{
-		return jdbcTemplate.queryForObject("select * from customer where mobileNumber=?",new BeanPropertyRowMapper<>(CustomerBean.class),mobileNumber);
+
+	public CustomerBean getCustomer(String mobileNumber) {
+		return repo.findById(mobileNumber).get().convertToBean();
 	}
-	
+
 	public void updateCustomer(String mobileNumber, CustomerBean bean) {
-		jdbcTemplate.update("update customer set MobileNumber=?,customerName=?,DOB=? where MobileNumber=?",
-				bean.getMobileNumber(), bean.getCustomerName(), bean.getDob(), mobileNumber);
+		// jdbcTemplate.update("update User set MobileNumber=?,password=?,UserType=?
+		// where MobileNumber=?",
+		// bean.getMobileNumber(), bean.getPassword(), bean.getUserType(),
+		// mobileNumber);
 	}
 	
 }

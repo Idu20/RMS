@@ -1,22 +1,29 @@
 package com.rms.startup.Entities;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.springframework.data.jpa.repository.Query;
 
 import com.rms.startup.Bean.UserBean;
 
 @Entity
-@Table(name = "User")
-public class UserEntity {
+@Table(name="user")
+public class UserEntity implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4990248415284750718L;
+
 	@Id
 	@Column(name = "mobilenumber")
 	private String mobileNumber;
 	
+	@Column(name="password")
 	private String password;
 
 	@Column(name = "usertype")

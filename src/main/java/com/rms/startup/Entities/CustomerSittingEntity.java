@@ -5,33 +5,30 @@ import javax.persistence.*;
 import java.util.List;
 
 
-/**
- * The persistent class for the customersitting database table.
- * 
- */
 @Entity
-@NamedQuery(name="Customersitting.findAll", query="SELECT c FROM Customersitting c")
-public class Customersitting implements Serializable {
+@Table(name="customersitting")
+public class CustomerSittingEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@Column(name="customersittingid")
 	private int customerSittingId;
 
 	//bi-directional many-to-one association to Customer
 	@ManyToOne
-	@JoinColumn(name="MobileNumber")
-	private Customer customer;
+	@JoinColumn(name="mobilenumber")
+	private CustomerEntity customer;
 
 	//bi-directional many-to-one association to Restauranttable
 	@ManyToOne
-	@JoinColumn(name="TableId")
-	private Restauranttable restauranttable;
+	@JoinColumn(name="tableid")
+	private RestaurantTableEntity restauranttable;
 
 	//bi-directional many-to-one association to Order
 	@OneToMany(mappedBy="customersitting")
-	private List<Order> orders;
+	private List<OrderEntity> orders;
 
-	public Customersitting() {
+	public CustomerSittingEntity() {
 	}
 
 	public int getCustomerSittingId() {
@@ -42,38 +39,38 @@ public class Customersitting implements Serializable {
 		this.customerSittingId = customerSittingId;
 	}
 
-	public Customer getCustomer() {
+	public CustomerEntity getCustomer() {
 		return this.customer;
 	}
 
-	public void setCustomer(Customer customer) {
+	public void setCustomer(CustomerEntity customer) {
 		this.customer = customer;
 	}
 
-	public Restauranttable getRestauranttable() {
+	public RestaurantTableEntity getRestauranttable() {
 		return this.restauranttable;
 	}
 
-	public void setRestauranttable(Restauranttable restauranttable) {
+	public void setRestauranttable(RestaurantTableEntity restauranttable) {
 		this.restauranttable = restauranttable;
 	}
 
-	public List<Order> getOrders() {
+	public List<OrderEntity> getOrders() {
 		return this.orders;
 	}
 
-	public void setOrders(List<Order> orders) {
+	public void setOrders(List<OrderEntity> orders) {
 		this.orders = orders;
 	}
 
-	public Order addOrder(Order order) {
+	public OrderEntity addOrder(OrderEntity order) {
 		getOrders().add(order);
 		order.setCustomersitting(this);
 
 		return order;
 	}
 
-	public Order removeOrder(Order order) {
+	public OrderEntity removeOrder(OrderEntity order) {
 		getOrders().remove(order);
 		order.setCustomersitting(null);
 

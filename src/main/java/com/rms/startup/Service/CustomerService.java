@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rms.startup.Bean.CustomerBean;
-import com.rms.startup.Bean.UserBean;
 import com.rms.startup.DAO.CustomerDAO;
 
 @Service
@@ -16,7 +15,7 @@ public class CustomerService {
 	CustomerDAO customerDAO;
 
 	public List<CustomerBean> getAllCustomer() {
-		return customerDAO.getAllCustomers();
+		return customerDAO.getAllCustomer();
 	}
 
 	public void addCustomer(CustomerBean bean) {

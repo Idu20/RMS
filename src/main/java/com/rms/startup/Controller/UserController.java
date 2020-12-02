@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -47,12 +48,20 @@ public class UserController {
 		userService.deleteUser(mobileNumber);
 	}
 	
-	@PutMapping("/update/{mobileNumber}")
-	public void updateUser(@RequestBody UserBean bean,@PathVariable String mobileNumber)
+	@PutMapping("/update")
+	public void updateUser(@RequestBody UserBean bean)
 	{
-		userService.updateUser(mobileNumber, bean);
+		userService.updateUser(bean);
 	}
 	
+	@PostMapping("/login")
+	public String logIn(@RequestParam String mobileNumber,@RequestParam String password)
+	{
+		if(userService.validateUser(mobileNumber, password))
+			return mobileNumber;
+		else
+			return null;
+	}
 //	@GetMapping("/logInList")
 //	public List<Map<String, Object>> show()
 //	{

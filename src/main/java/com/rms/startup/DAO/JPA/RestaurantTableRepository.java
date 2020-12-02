@@ -3,9 +3,9 @@ package com.rms.startup.DAO.JPA;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.rms.startup.Entities.CategoryEntity;
+import com.rms.startup.Entities.RestaurantTableEntity;
 
 @Repository
-public interface CategoryRepository extends JpaRepository<CategoryEntity, Integer>{
+public interface RestaurantTableRepository extends JpaRepository<RestaurantTableEntity, Integer>{
 
 }

@@ -6,35 +6,35 @@ import java.util.Date;
 import java.util.List;
 
 
-/**
- * The persistent class for the order database table.
- * 
- */
 @Entity
-@NamedQuery(name="Order.findAll", query="SELECT o FROM Order o")
-public class Order implements Serializable {
+@Table(name="Order")
+public class OrderEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@Column(name="orderId")
 	private String orderId;
 
 	@Temporal(TemporalType.DATE)
+	@Column(name="orderdate")
 	private Date orderDate;
 
+	@Column(name="orderdiscount")
 	private float orderDiscount;
 
+	@Column(name="ordertotal")
 	private float orderTotal;
 
 	//bi-directional many-to-one association to Customersitting
 	@ManyToOne
-	@JoinColumn(name="CustomerSittingId")
-	private Customersitting customersitting;
+	@JoinColumn(name="customersittingid")
+	private CustomerSittingEntity customersitting;
 
 	//bi-directional many-to-one association to Ordereditem
 	@OneToMany(mappedBy="order")
-	private List<Ordereditem> ordereditems;
+	private List<OrderedItemsEntity> ordereditems;
 
-	public Order() {
+	public OrderEntity() {
 	}
 
 	public String getOrderId() {
@@ -69,32 +69,32 @@ public class Order implements Serializable {
 		this.orderTotal = orderTotal;
 	}
 
-	public Customersitting getCustomersitting() {
+	public CustomerSittingEntity getCustomersitting() {
 		return this.customersitting;
 	}
 
-	public void setCustomersitting(Customersitting customersitting) {
+	public void setCustomersitting(CustomerSittingEntity customersitting) {
 		this.customersitting = customersitting;
 	}
 
-	public List<Ordereditem> getOrdereditems() {
+	public List<OrderedItemsEntity> getOrdereditems() {
 		return this.ordereditems;
 	}
 
-	public void setOrdereditems(List<Ordereditem> ordereditems) {
+	public void setOrdereditems(List<OrderedItemsEntity> ordereditems) {
 		this.ordereditems = ordereditems;
 	}
 
-	public Ordereditem addOrdereditem(Ordereditem ordereditem) {
+	public OrderedItemsEntity addOrdereditem(OrderedItemsEntity ordereditem) {
 		getOrdereditems().add(ordereditem);
-		ordereditem.setOrder(this);
+		ordereditem.setOrderEntity(this);
 
 		return ordereditem;
 	}
 
-	public Ordereditem removeOrdereditem(Ordereditem ordereditem) {
+	public OrderedItemsEntity removeOrdereditem(OrderedItemsEntity ordereditem) {
 		getOrdereditems().remove(ordereditem);
-		ordereditem.setOrder(null);
+		ordereditem.setOrderEntity(null);
 
 		return ordereditem;
 	}

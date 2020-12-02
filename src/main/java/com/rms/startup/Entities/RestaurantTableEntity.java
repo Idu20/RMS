@@ -1,5 +1,4 @@
 package com.rms.startup.Entities;
-
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
@@ -10,22 +9,25 @@ import java.util.List;
  * 
  */
 @Entity
-@NamedQuery(name="Restauranttable.findAll", query="SELECT r FROM Restauranttable r")
-public class Restauranttable implements Serializable {
+@Table(name="restauranttable")
+public class RestaurantTableEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@Column(name="tableid")
 	private int tableId;
 
+	@Column(name="occupied")
 	private byte occupied;
 
+	@Column(name="tablecapacity")
 	private int tableCapacity;
 
 	//bi-directional many-to-one association to Customersitting
 	@OneToMany(mappedBy="restauranttable")
-	private List<Customersitting> customersittings;
+	private List<CustomerSittingEntity> customersittings;
 
-	public Restauranttable() {
+	public RestaurantTableEntity() {
 	}
 
 	public int getTableId() {
@@ -52,22 +54,22 @@ public class Restauranttable implements Serializable {
 		this.tableCapacity = tableCapacity;
 	}
 
-	public List<Customersitting> getCustomersittings() {
+	public List<CustomerSittingEntity> getCustomersittings() {
 		return this.customersittings;
 	}
 
-	public void setCustomersittings(List<Customersitting> customersittings) {
+	public void setCustomersittings(List<CustomerSittingEntity> customersittings) {
 		this.customersittings = customersittings;
 	}
 
-	public Customersitting addCustomersitting(Customersitting customersitting) {
+	public CustomerSittingEntity addCustomersitting(CustomerSittingEntity customersitting) {
 		getCustomersittings().add(customersitting);
 		customersitting.setRestauranttable(this);
 
 		return customersitting;
 	}
 
-	public Customersitting removeCustomersitting(Customersitting customersitting) {
+	public CustomerSittingEntity removeCustomersitting(CustomerSittingEntity customersitting) {
 		getCustomersittings().remove(customersitting);
 		customersitting.setRestauranttable(null);
 

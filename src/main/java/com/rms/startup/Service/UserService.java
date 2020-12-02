@@ -32,9 +32,16 @@ public class UserService {
 		return userDAO.getUser(mobileNumber);
 	}
 	
-	public void updateUser(String mobileNumber,UserBean bean)
+	public void updateUser(UserBean bean)
 	{
-		userDAO.updateUser(mobileNumber, bean);
+		userDAO.updateUser(bean);
 	}
 	
+	public boolean validateUser(String mobileNumber,String password)
+	{
+		if(userDAO.getUser(mobileNumber).getPassword().equals(password))
+			return true;
+		else
+			return false;
+	}
 }

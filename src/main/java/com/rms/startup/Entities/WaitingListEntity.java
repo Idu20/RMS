@@ -1,5 +1,6 @@
 package com.rms.startup.Entities;
 
+
 import java.io.Serializable;
 import javax.persistence.*;
 
@@ -9,21 +10,23 @@ import javax.persistence.*;
  * 
  */
 @Entity
-@NamedQuery(name="Waitinglist.findAll", query="SELECT w FROM Waitinglist w")
-public class Waitinglist implements Serializable {
+@Table(name="waitinglist")
+public class WaitingListEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@Column(name="waitingnumber")
 	private int waitingNumber;
 
+	@Column(name="numberofperson")
 	private int numberOfPerson;
 
 	//bi-directional many-to-one association to Customer
 	@ManyToOne
-	@JoinColumn(name="MobileNumber")
-	private Customer customer;
+	@JoinColumn(name="mobilenumber")
+	private CustomerEntity customer;
 
-	public Waitinglist() {
+	public WaitingListEntity() {
 	}
 
 	public int getWaitingNumber() {
@@ -42,11 +45,11 @@ public class Waitinglist implements Serializable {
 		this.numberOfPerson = numberOfPerson;
 	}
 
-	public Customer getCustomer() {
+	public CustomerEntity getCustomer() {
 		return this.customer;
 	}
 
-	public void setCustomer(Customer customer) {
+	public void setCustomer(CustomerEntity customer) {
 		this.customer = customer;
 	}
 
