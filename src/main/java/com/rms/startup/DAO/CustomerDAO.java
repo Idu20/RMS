@@ -3,6 +3,8 @@ package com.rms.startup.DAO;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -10,6 +12,8 @@ import com.rms.startup.Bean.CustomerBean;
 import com.rms.startup.DAO.JPA.CustomerRepository;
 import com.rms.startup.Entities.CustomerEntity;
 
+
+@Transactional
 @Repository
 public class CustomerDAO {
 	

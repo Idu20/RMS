@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.rms.startup.Bean.UserBean;
 import com.rms.startup.DAO.JPA.UserRepository;
-import com.rms.startup.Entities.UserEntity;
+import com.rms.startup.Entities.UserEntity;;
 
 @Repository
 @Transactional

@@ -15,6 +15,7 @@ import javax.persistence.Table;
 @Table(name="ordereditems")
 public class OrderedItemsEntity implements Serializable{
 
+
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -33,6 +34,7 @@ public class OrderedItemsEntity implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="itemid")
 	private ItemEntity item;
+
 
 	//bi-directional many-to-one association to Order
 	@ManyToOne
