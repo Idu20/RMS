@@ -25,12 +25,24 @@ public class CategoryDAO {
 	}
 
 	public void addCategory(CategoryBean bean) {
-		//jdbcTemplate.update("insert into Category(CategoryId,CategoryName) values(?,?)", bean.getCategoryId(),
-			//	bean.getCategoryName());
+		CategoryEntity category = new CategoryEntity(bean);
+		repo.save(category);
 	}
 
-	public void deleteCategory(Integer categoryId) {
-	//	jdbcTemplate.update("delete from Category where categoryId=?", categoryId);
+	public boolean deleteCategory(Integer categoryId) {
+		if(repo.existsById(categoryId))
+		{
+			try
+			{
+				repo.deleteById(categoryId);
+			}
+			catch(Exception e)
+			{
+				return false;
+			}
+			return true;
+		}
+		return false;
 	}
 
 	public CategoryBean getCategory(Integer categoryId) {
