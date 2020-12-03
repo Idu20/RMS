@@ -43,9 +43,9 @@ public class UserController {
 	}
 	
 	@DeleteMapping("/delete/{mobileNumber}")
-	public void deleteUser(@PathVariable String mobileNumber)
+	public boolean deleteUser(@PathVariable String mobileNumber)
 	{
-		userService.deleteUser(mobileNumber);
+		return userService.deleteUser(mobileNumber);
 	}
 	
 	@PutMapping("/update")

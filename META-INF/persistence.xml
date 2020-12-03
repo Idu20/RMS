@@ -3,9 +3,9 @@
 	<persistence-unit name="RMS" transaction-type="RESOURCE_LOCAL">
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/RMS"/>
-			<property name="javax.persistence.jdbc.user" value="idris"/>
-			<property name="javax.persistence.jdbc.password" value="Idris2020@"/>
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/rms"/>
+			<property name="javax.persistence.jdbc.user" value="root"/>
+			<property name="javax.persistence.jdbc.password" value=""/>
 		</properties>
 	</persistence-unit>
 </persistence>

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.rms.startup.StringValues;
 import com.rms.startup.Bean.UserBean;
 import com.rms.startup.DAO.UserDAO;
 
@@ -19,22 +20,31 @@ public class UserService {
 	}
 
 	public void addUser(UserBean bean) {
-		userDAO.addUser(bean);
+		if(userDAO.getUser(bean.getMobileNumber()) == null)
+			userDAO.addUser(bean);
 	}
 
-	public void deleteUser(String mobileNumber)
+	public boolean deleteUser(String mobileNumber)
 	{
-		userDAO.deleteUser(mobileNumber);
+		if(userDAO.getUser(mobileNumber) != null)
+		{
+			userDAO.deleteUser(mobileNumber);
+			return true;
+		}
+		return false;
 	}
 	
 	public UserBean getUser(String mobileNumber)
 	{
-		return userDAO.getUser(mobileNumber);
+		if(userDAO.getUser(mobileNumber) != null)
+			return userDAO.getUser(mobileNumber);
+		return null;
 	}
 	
 	public void updateUser(UserBean bean)
 	{
-		userDAO.updateUser(bean);
+		if(userDAO.getUser(bean.getMobileNumber()) != null)
+			userDAO.updateUser(bean);
 	}
 	
 	public boolean validateUser(String mobileNumber,String password)

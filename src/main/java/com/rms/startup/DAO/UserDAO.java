@@ -22,7 +22,7 @@ public class UserDAO {
 	public List<UserBean> getAllUser() {
 		List<UserEntity> lst = repo.findAll();
 		List<UserBean> returnLst = new ArrayList<UserBean>();
-		for(UserEntity list : lst)
+		for (UserEntity list : lst)
 			returnLst.add(list.convertToBean());
 		return returnLst;
 	}
@@ -32,17 +32,12 @@ public class UserDAO {
 		repo.save(u);
 	}
 
-	public boolean deleteUser(String mobileNumber) {
-		if(repo.existsById(mobileNumber))
-		{
-			repo.deleteById(mobileNumber);
-			return true;
-		}
-		return false;
+	public void deleteUser(String mobileNumber) {
+		repo.deleteById(mobileNumber);
 	}
 
 	public UserBean getUser(String mobileNumber) {
-		if(repo.existsById(mobileNumber))
+		if (repo.existsById(mobileNumber))
 			return repo.findById(mobileNumber).get().convertToBean();
 		return null;
 	}
@@ -50,6 +45,5 @@ public class UserDAO {
 	public void updateUser(UserBean bean) {
 		repo.save(new UserEntity(bean));
 	}
-
 
 }
