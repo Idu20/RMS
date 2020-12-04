@@ -1,77 +1,72 @@
 package com.rms.startup.Entities;
 
 import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
+import javax.persistence.*;
 
 import com.rms.startup.Bean.UserBean;
-import com.rms.startup.Bean.UserTypeBean;
 
+
+/**
+ * The persistent class for the user database table.
+ * 
+ */
 @Entity
-@Table(name="user")
-public class UserEntity implements Serializable{
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 4990248415284750718L;
+@Table(name="userentity")
+public class UserEntity implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "mobilenumber")
+	@Column(name="mobilenumber")
 	private String mobileNumber;
-	
+
 	@Column(name="password")
 	private String password;
 
+	//bi-directional many-to-one association to Usertype
 	@ManyToOne
-	@JoinColumn(name = "usertype")
-	private UserTypeEntity userType;
+	@JoinColumn(name="usertype")
+	private UserTypeEntity usertype;
 
 	public UserEntity() {
 	}
-
-	public UserEntity(UserBean u) {
-		this.mobileNumber = u.getMobileNumber();
-		this.password = u.getPassword();
-		this.userType = new UserTypeEntity(u.getUserType());
+	
+	public UserEntity(UserBean bean) {
+		this.setMobileNumber(bean.getMobileNumber());
+		this.setPassword(bean.getPassword());
+		this.setUsertype(new UserTypeEntity(bean.getUserType()));
 	}
 
-	public String getPassword() {
-		return password;
+	public UserBean convertToBean()
+	{
+		UserBean bean = new UserBean();
+		bean.setMobileNumber(this.mobileNumber);
+		bean.setPassword(this.password);
+		bean.setUserType(this.usertype.convertToBean());
+		return bean;
 	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public int getUserType() {
-		return userType;
-	}
-
-	public void setUserType(int userType) {
-		this.userType = userType;
-	}
-
+	
 	public String getMobileNumber() {
-		return mobileNumber;
+		return this.mobileNumber;
 	}
 
 	public void setMobileNumber(String mobileNumber) {
 		this.mobileNumber = mobileNumber;
 	}
 
-	public UserBean convertToBean() {
-		UserBean u = new UserBean();
-		u.setMobileNumber(this.mobileNumber);
-		u.setPassword(this.password);
-		u.setUserType(this.userType);
-		return u;
+	public String getPassword() {
+		return this.password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public UserTypeEntity getUsertype() {
+		return this.usertype;
+	}
+
+	public void setUsertype(UserTypeEntity usertype) {
+		this.usertype = usertype;
 	}
 
 }
