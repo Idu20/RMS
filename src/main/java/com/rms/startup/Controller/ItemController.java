@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.rms.startup.Bean.CategoryBean;
 import com.rms.startup.Bean.ItemBean;
 import com.rms.startup.Service.ItemService;
 
@@ -26,5 +25,25 @@ public class ItemController {
 	@GetMapping("/show")
 	public List<ItemBean> showData() {
 		return itemService.getAllItems();
+	}
+	
+	@PostMapping("/add")
+	public String addItem(@RequestBody ItemBean bean) {
+		return itemService.addItem(bean);
+	}
+
+	@GetMapping("/show/{itemId}")
+	public ItemBean getItem(@PathVariable Integer itemId) {
+		return itemService.getItem(itemId);
+	}
+
+	@DeleteMapping("/delete/{itemId}")
+	public String deleteItem(@PathVariable Integer itemId) {
+		return itemService.deleteItem(itemId);
+	}
+
+	@PutMapping("/update")
+	public String updateItem(@RequestBody ItemBean bean) {
+		return itemService.updateItem(bean);
 	}
 }

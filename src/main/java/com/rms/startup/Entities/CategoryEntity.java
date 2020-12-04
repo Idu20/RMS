@@ -76,6 +76,7 @@ public class CategoryEntity implements Serializable{
 		return item;
 	}
 
+	
 	@Override
 	public String toString() {
 		return "CategoryBean [categoryId=" + categoryId + ", categoryName=" + categoryName + "]";

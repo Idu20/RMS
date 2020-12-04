@@ -33,6 +33,18 @@ public class ItemEntity implements Serializable{
 	@JoinColumn(name="categoryid")
 	private CategoryEntity category;
 	
+	public ItemEntity() {
+		
+	}
+	
+	public ItemEntity(ItemBean bean) {
+		this.itemId = bean.getItemId();
+		this.itemName = bean.getItemName();
+		this.itemDescription = bean.getItemDescription();
+		this.itemPrice = bean.getItemPrice();
+		this.category = new CategoryEntity(bean.getCategory());
+	}
+	
 	public List<OrderedItemsEntity> getOrdereditems() {
 		return ordereditems;
 	}
@@ -87,14 +99,14 @@ public class ItemEntity implements Serializable{
 	
 	public OrderedItemsEntity addOrdereditem(OrderedItemsEntity ordereditem) {
 		getOrdereditems().add(ordereditem);
-		ordereditem.setItemEntity(this);
+		ordereditem.setItem(this);
 
 		return ordereditem;
 	}
 
 	public OrderedItemsEntity removeOrdereditem(OrderedItemsEntity ordereditem) {
 		getOrdereditems().remove(ordereditem);
-		ordereditem.setItemEntity(null);
+		ordereditem.setItem(null);
 
 		return ordereditem;
 	}

@@ -2,6 +2,9 @@ package com.rms.startup.Entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.rms.startup.Bean.CustomerSittingBean;
+
 import java.util.List;
 
 
@@ -29,6 +32,21 @@ public class CustomerSittingEntity implements Serializable {
 	private List<OrderEntity> orders;
 
 	public CustomerSittingEntity() {
+	}
+	
+	public CustomerSittingEntity(CustomerSittingBean bean) {
+		this.customer = new CustomerEntity(bean.getCustomer());
+		this.customerSittingId = bean.getCustomerSittingId();
+		this.restauranttable = new RestaurantTableEntity(bean.getRestauranttable());
+	}
+	
+	public CustomerSittingBean convertToBean()
+	{
+		CustomerSittingBean bean = new CustomerSittingBean();
+		bean.setCustomer(this.customer.convertToBean());
+		bean.setRestauranttable(this.restauranttable.convertToBean());
+		bean.setCustomerSittingId(this.customerSittingId);
+		return bean;
 	}
 
 	public int getCustomerSittingId() {

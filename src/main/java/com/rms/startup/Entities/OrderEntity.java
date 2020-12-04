@@ -2,17 +2,20 @@ package com.rms.startup.Entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.rms.startup.Bean.OrderBean;
+
 import java.util.Date;
 import java.util.List;
 
 
 @Entity
-@Table(name="Order")
+@Table(name="orderdetail")
 public class OrderEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="orderId")
+	@Column(name="orderid")
 	private String orderId;
 
 	@Temporal(TemporalType.DATE)
@@ -35,6 +38,27 @@ public class OrderEntity implements Serializable {
 	private List<OrderedItemsEntity> ordereditems;
 
 	public OrderEntity() {
+	}
+	
+	public OrderEntity(OrderBean bean)
+	{
+		this.orderId = bean.getOrderId();
+		this.orderDate = bean.getOrderDate();
+		this.orderDiscount = bean.getOrderDiscount();
+		this.orderTotal = bean.getOrderTotal();
+		this.customersitting = new CustomerSittingEntity(bean.getCustomersitting());
+	}
+	
+	public OrderBean convertToBean()
+	{
+		OrderBean bean = new OrderBean();
+		bean.setOrderId(this.orderId);
+		bean.setOrderDate(this.orderDate);
+		bean.setOrderDiscount(this.orderDiscount);
+		bean.setOrderTotal(this.orderTotal);
+		bean.setCustomersitting(this.customersitting.convertToBean());
+		return bean;
+		
 	}
 
 	public String getOrderId() {
@@ -69,8 +93,9 @@ public class OrderEntity implements Serializable {
 		this.orderTotal = orderTotal;
 	}
 
+
 	public CustomerSittingEntity getCustomersitting() {
-		return this.customersitting;
+		return customersitting;
 	}
 
 	public void setCustomersitting(CustomerSittingEntity customersitting) {
@@ -78,7 +103,7 @@ public class OrderEntity implements Serializable {
 	}
 
 	public List<OrderedItemsEntity> getOrdereditems() {
-		return this.ordereditems;
+		return ordereditems;
 	}
 
 	public void setOrdereditems(List<OrderedItemsEntity> ordereditems) {
@@ -87,14 +112,14 @@ public class OrderEntity implements Serializable {
 
 	public OrderedItemsEntity addOrdereditem(OrderedItemsEntity ordereditem) {
 		getOrdereditems().add(ordereditem);
-		ordereditem.setOrderEntity(this);
+		ordereditem.setOrder(this);
 
 		return ordereditem;
 	}
 
 	public OrderedItemsEntity removeOrdereditem(OrderedItemsEntity ordereditem) {
 		getOrdereditems().remove(ordereditem);
-		ordereditem.setOrderEntity(null);
+		ordereditem.setOrder(null);
 
 		return ordereditem;
 	}

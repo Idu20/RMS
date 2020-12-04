@@ -8,5 +8,6 @@ public class Messages {
 	public static final String alreadyExist = "Already Exist";
 	public static final String doesNotExist = "Does Not Exist";
 	
-	
+	public static final String itemExistError = "Error deleting category.Item with that category exist.";
+	public static final String error = "Could not perform operation";
 }

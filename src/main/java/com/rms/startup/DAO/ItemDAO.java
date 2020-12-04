@@ -23,4 +23,26 @@ public class ItemDAO {
 			returnlst.add(Item.convertToBean());
 		return returnlst;
 	}
+	
+	public void addItem(ItemBean item)
+	{
+		repo.save(new ItemEntity(item));
+	}
+	
+	public void deleteItem(Integer itemId)
+	{
+		repo.deleteById(itemId);
+	}
+	
+	public void updateItem(ItemBean item)
+	{
+		repo.save(new ItemEntity(item));
+	}
+	
+	public ItemBean getItem(Integer itemId)
+	{
+		if(repo.existsById(itemId))
+			return repo.findById(itemId).get().convertToBean();
+		return null;
+	}
 }

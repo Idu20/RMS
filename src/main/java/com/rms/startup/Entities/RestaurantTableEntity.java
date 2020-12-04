@@ -1,6 +1,9 @@
 package com.rms.startup.Entities;
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.rms.startup.Bean.RestaurantTableBean;
+
 import java.util.List;
 
 
@@ -29,6 +32,22 @@ public class RestaurantTableEntity implements Serializable {
 
 	public RestaurantTableEntity() {
 	}
+	
+	public RestaurantTableEntity(RestaurantTableBean bean) {
+		this.tableId = bean.getTableId();
+		this.tableCapacity = bean.getTableCapacity();
+		this.occupied = bean.getOccupied();
+	}
+	
+	public RestaurantTableBean convertToBean()
+	{
+		RestaurantTableBean bean = new RestaurantTableBean();
+		bean.setTableId(this.tableId);
+		bean.setTableCapacity(this.tableCapacity);
+		bean.setOccupied(this.occupied);
+		return bean;
+	}
+
 
 	public int getTableId() {
 		return this.tableId;

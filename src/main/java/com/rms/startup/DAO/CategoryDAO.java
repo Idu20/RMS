@@ -29,31 +29,18 @@ public class CategoryDAO {
 		repo.save(category);
 	}
 
-	public boolean deleteCategory(Integer categoryId) {
-		if(repo.existsById(categoryId))
-		{
-			try
-			{
-				repo.deleteById(categoryId);
-			}
-			catch(Exception e)
-			{
-				return false;
-			}
-			return true;
-		}
-		return false;
+	public void deleteCategory(Integer categoryId) throws Exception{
+		repo.deleteById(categoryId);
 	}
 
 	public CategoryBean getCategory(Integer categoryId) {
+		if(repo.existsById(categoryId))
+			return repo.findById(categoryId).get().convertToBean();
 		return null;
-//		System.out.println("Category Id DAO " + categoryId);
-//		return jdbcTemplate.queryForObject("select * from Category where categoryId=?", new BeanPropertyRowMapper<>(CategoryBean.class), categoryId);
 	}
 
-	public void updateCategory(Integer categoryId, CategoryBean bean) {
-//		jdbcTemplate.update("update Category set categoryId=?,CategoryName=? where categoryId=?", bean.getCategoryId(),
-//				bean.getCategoryName(), categoryId);
+	public void updateCategory(CategoryBean bean) {
+		repo.save(new CategoryEntity(bean));
 	}
 
 }

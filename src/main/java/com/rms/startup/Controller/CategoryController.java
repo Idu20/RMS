@@ -28,24 +28,23 @@ public class CategoryController {
 	}
 
 	@PostMapping("/add")
-	public void addCategory(@RequestBody CategoryBean bean) {
-		CategoryService.addCategory(bean);
+	public String addCategory(@RequestBody CategoryBean bean) {
+		return CategoryService.addCategory(bean);
 	}
 
 	@GetMapping("/show/{categoryId}")
 	public CategoryBean getCategory(@PathVariable Integer categoryId) {
-		System.out.println("Category Id " + categoryId);
 		return CategoryService.getCategory(categoryId);
 	}
 
 	@DeleteMapping("/delete/{categoryId}")
-	public void deleteCategory(@PathVariable Integer categoryId) {
-		CategoryService.deleteCategory(categoryId);
+	public String deleteCategory(@PathVariable Integer categoryId) {
+		return CategoryService.deleteCategory(categoryId);
 	}
 
-	@PutMapping("/update/{categoryId}")
-	public void updateCategory(@RequestBody CategoryBean bean, @PathVariable Integer categoryId) {
-		CategoryService.updateCategory(categoryId, bean);
+	@PutMapping("/update")
+	public String updateCategory(@RequestBody CategoryBean bean) {
+		return CategoryService.updateCategory(bean);
 	}
 
 }

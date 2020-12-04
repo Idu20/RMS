@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.rms.startup.Bean.OrderedItemsBean;
+
 
 
 @Entity
@@ -45,6 +47,28 @@ public class OrderedItemsEntity implements Serializable{
 	public OrderedItemsEntity() {
 	}
 
+	public OrderedItemsEntity(OrderedItemsBean bean) {
+		this.orderedItemsId = bean.getOrderedItemsId();
+		this.order = new OrderEntity(bean.getOrder());
+		this.item = new ItemEntity(bean.getItem());
+		this.instruction = bean.getInstruction();
+		this.quantity = bean.getQuantity();
+		this.status = bean.getStatus();
+	}
+
+	
+	public OrderedItemsBean convertToBean()
+	{
+		OrderedItemsBean bean = new OrderedItemsBean();
+		bean.setInstruction(this.instruction);
+		bean.setOrderedItemsId(this.orderedItemsId);
+		bean.setQuantity(this.quantity);
+		bean.setStatus(this.status);
+		bean.setItem(this.item.convertToBean());
+		bean.setOrder(this.order.convertToBean());
+		return bean;
+	}
+	
 	public String getInstruction() {
 		return this.instruction;
 	}
@@ -69,19 +93,19 @@ public class OrderedItemsEntity implements Serializable{
 		this.status = status;
 	}
 	
-	public void setItemEntity(ItemEntity item)
+	public void setItem(ItemEntity item)
 	{
 		this.item = item;
 	}
-	public ItemEntity getItemEntity()
+	public ItemEntity getItem()
 	{
 		return item;
 	}
-	public void setOrderEntity(OrderEntity order)
+	public void setOrder(OrderEntity order)
 	{
 		this.order = order;
 	}
-	public OrderEntity getOrderEntity()
+	public OrderEntity getOrder()
 	{
 		return order;
 	}
