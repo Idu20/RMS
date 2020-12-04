@@ -5,10 +5,13 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 
 import com.rms.startup.Bean.UserBean;
+import com.rms.startup.Bean.UserTypeBean;
 
 @Entity
 @Table(name="user")
@@ -26,8 +29,9 @@ public class UserEntity implements Serializable{
 	@Column(name="password")
 	private String password;
 
-	@Column(name = "usertype")
-	private int userType;
+	@ManyToOne
+	@JoinColumn(name = "usertype")
+	private UserTypeEntity userType;
 
 	public UserEntity() {
 	}
@@ -35,7 +39,7 @@ public class UserEntity implements Serializable{
 	public UserEntity(UserBean u) {
 		this.mobileNumber = u.getMobileNumber();
 		this.password = u.getPassword();
-		this.userType = u.getUserType();
+		this.userType = new UserTypeEntity(u.getUserType());
 	}
 
 	public String getPassword() {
