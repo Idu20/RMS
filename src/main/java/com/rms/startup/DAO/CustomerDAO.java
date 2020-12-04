@@ -12,11 +12,10 @@ import com.rms.startup.Bean.CustomerBean;
 import com.rms.startup.DAO.JPA.CustomerRepository;
 import com.rms.startup.Entities.CustomerEntity;
 
-
 @Transactional
 @Repository
 public class CustomerDAO {
-	
+
 	@Autowired
 	CustomerRepository repo;
 
@@ -35,6 +34,7 @@ public class CustomerDAO {
 
 	public void deleteCustomer(String mobileNumber) {
 		// jdbcTemplate.update("delete from user where MobileNumber=?", mobileNumber);
+		repo.deleteById(mobileNumber);
 	}
 
 	public CustomerBean getCustomer(String mobileNumber) {
@@ -46,6 +46,13 @@ public class CustomerDAO {
 		// where MobileNumber=?",
 		// bean.getMobileNumber(), bean.getPassword(), bean.getUserType(),
 		// mobileNumber);
+		repo.save(new CustomerEntity(bean));
 	}
-	
+
+	public boolean customerExists(String mobileNumber) {
+		if (repo.existsById(mobileNumber))
+			return true;
+		return false;
+	}
+
 }

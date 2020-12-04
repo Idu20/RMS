@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.rms.startup.StringValues;
+import com.rms.startup.Messages;
 import com.rms.startup.Bean.UserBean;
 import com.rms.startup.DAO.UserDAO;
 
@@ -19,37 +19,41 @@ public class UserService {
 		return userDAO.getAllUser();
 	}
 
-	public void addUser(UserBean bean) {
-		if(userDAO.getUser(bean.getMobileNumber()) == null)
+	public String addUser(UserBean bean) {
+		if (userDAO.getUser(bean.getMobileNumber()) == null) {
 			userDAO.addUser(bean);
+			return Messages.added;
+		}
+		return Messages.notAdded;
+
 	}
 
-	public boolean deleteUser(String mobileNumber)
-	{
-		if(userDAO.getUser(mobileNumber) != null)
-		{
+	public String deleteUser(String mobileNumber) {
+		if (userDAO.getUser(mobileNumber) != null) {
 			userDAO.deleteUser(mobileNumber);
-			return true;
+			return Messages.deleted;
 		}
-		return false;
+		return Messages.notDeleted;
 	}
-	
-	public UserBean getUser(String mobileNumber)
-	{
-		if(userDAO.getUser(mobileNumber) != null)
+
+	public UserBean getUser(String mobileNumber) {
+		if (userDAO.getUser(mobileNumber) != null)
 			return userDAO.getUser(mobileNumber);
 		return null;
 	}
-	
-	public void updateUser(UserBean bean)
-	{
-		if(userDAO.getUser(bean.getMobileNumber()) != null)
+
+	public String updateUser(String mobileNumber,UserBean bean) {
+		if (userDAO.getUser(mobileNumber) != null)
+		{
 			userDAO.updateUser(bean);
+			return Messages.updated;
+		}
+		return Messages.notUpdated;
+			
 	}
-	
-	public boolean validateUser(String mobileNumber,String password)
-	{
-		if(userDAO.getUser(mobileNumber).getPassword().equals(password))
+
+	public boolean validateUser(UserBean bean) {
+		if (userDAO.getUser(bean.getMobileNumber()).getPassword().equals(bean.getPassword()))
 			return true;
 		else
 			return false;

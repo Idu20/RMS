@@ -30,9 +30,9 @@ public class CustomerController {
 	}
 
 	@PostMapping("/add")
-	public void addCustomer(@RequestBody CustomerBean bean)
+	public String addCustomer(@RequestBody CustomerBean bean)
 	{
-		customerService.addCustomer(bean);
+		return customerService.addCustomer(bean);
 	}
 	
 	@GetMapping("/show/{mobileNumber}")
@@ -42,15 +42,15 @@ public class CustomerController {
 	}
 	
 	@DeleteMapping("/delete/{mobileNumber}")
-	public void deleteCustomer(@PathVariable String mobileNumber)
+	public String deleteCustomer(@PathVariable String mobileNumber)
 	{
-		customerService.deleteCustomer(mobileNumber);
+		return customerService.deleteCustomer(mobileNumber);
 	}
 	
 	@PutMapping("/update/{mobileNumber}")
-	public void updateCustomer(@RequestBody CustomerBean bean,@PathVariable String mobileNumber)
+	public String updateCustomer(@RequestBody CustomerBean bean,@PathVariable String mobileNumber)
 	{
-		customerService.updateCustomer(mobileNumber, bean);
+		return customerService.updateCustomer(mobileNumber, bean);
 	}
 	
 }
