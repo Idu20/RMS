@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.rms.startup.Messages;
 import com.rms.startup.Bean.CustomerBean;
 import com.rms.startup.DAO.CustomerDAO;
 
@@ -18,23 +19,35 @@ public class CustomerService {
 		return customerDAO.getAllCustomer();
 	}
 
-	public void addCustomer(CustomerBean bean) {
+	public String addCustomer(CustomerBean bean) {
+		if (customerDAO.customerExists(bean.getMobileNumber())) {
+			return Messages.alreadyExist;
+		}
 		customerDAO.addCustomer(bean);
+		return Messages.added;
 	}
 
-	public void deleteCustomer(String mobileNumber)
-	{
-		customerDAO.deleteCustomer(mobileNumber);
+	public String deleteCustomer(String mobileNumber) {
+		if (customerDAO.customerExists(mobileNumber)) {
+			customerDAO.deleteCustomer(mobileNumber);
+			return Messages.deleted;
+		}
+		return Messages.notDeleted;
+
 	}
-	
-	public CustomerBean getCustomer(String mobileNumber)
-	{
+
+	public CustomerBean getCustomer(String mobileNumber) {
 		return customerDAO.getCustomer(mobileNumber);
 	}
-	
-	public void updateCustomer(String mobileNumber,CustomerBean bean)
-	{
-		customerDAO.updateCustomer(mobileNumber, bean);
+
+	public String updateCustomer(String mobileNumber, CustomerBean bean) {
+		
+		if(customerDAO.customerExists(mobileNumber))
+		{
+			customerDAO.updateCustomer(mobileNumber, bean);
+			return Messages.updated;
+		}
+		return Messages.notUpdated;	
 	}
-	
+
 }
