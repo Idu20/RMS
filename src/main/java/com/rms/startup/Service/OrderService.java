@@ -57,4 +57,11 @@ public class OrderService {
 	{
 		return orderDAO.getOrder(orderId);
 	}
+	
+	public String findByCustomerSittingId(Integer customerSittingId)
+	{
+		return orderDAO.findByCustomerSittingId(customerSittingId);
+	}
+	
+	
 }

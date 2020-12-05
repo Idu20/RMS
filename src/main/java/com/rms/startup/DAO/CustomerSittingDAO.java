@@ -45,4 +45,10 @@ public class CustomerSittingDAO {
 			return repo.findById(customerSittingId).get().convertToBean();
 		return null;
 	}
+	
+	public Integer findByTableId(Integer tableId)
+	{
+		return repo.findTable(tableId).get(0);
+	}
+	
 }

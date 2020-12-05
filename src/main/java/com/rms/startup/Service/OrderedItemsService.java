@@ -57,4 +57,19 @@ public class OrderedItemsService {
 	{
 		return orderedItemsDAO.getOrderedItems(orderedItemsId);
 	}
+	
+	@Autowired
+	CustomerSittingService customerSittingService;
+	
+	@Autowired
+	OrderService orderService;
+	
+	public List<OrderedItemsBean> findByOrderId(Integer tableId)
+	{
+		Integer customerSittingId = customerSittingService.findByTableId(tableId);
+		String orderId = orderService.findByCustomerSittingId(customerSittingId);
+		return orderedItemsDAO.findByOrderId(orderId);
+	}
+	
+	
 }
