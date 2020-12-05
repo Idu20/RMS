@@ -57,4 +57,10 @@ public class CustomerSittingService {
 	{
 		return customerSittingDAO.getCustomerSitting(customerSittingId);
 	}
+	
+	public Integer findByTableId(Integer tableId)
+	{
+		return customerSittingDAO.findByTableId(tableId);
+	}
+	
 }

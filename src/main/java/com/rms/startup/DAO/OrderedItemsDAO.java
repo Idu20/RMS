@@ -45,4 +45,16 @@ public class OrderedItemsDAO {
 			return repo.findById(orderedItemsId).get().convertToBean();
 		return null;
 	}
+	
+	public List<OrderedItemsBean> findByOrderId(String orderId)
+	{
+		List<OrderedItemsEntity> lst = repo.findOrder(orderId);
+		List<OrderedItemsBean> returnlst = new ArrayList<OrderedItemsBean>();
+		for(OrderedItemsEntity OrderedItems : lst)
+			returnlst.add(OrderedItems.convertToBean());
+		return returnlst;
+		
+	}
+	
+	
 }

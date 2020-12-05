@@ -11,7 +11,7 @@ import com.rms.startup.Bean.UserBean;
  * 
  */
 @Entity
-@Table(name="userentity")
+@Table(name="user")
 public class UserEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
