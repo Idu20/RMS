@@ -1,5 +1,6 @@
 package com.rms.startup.Service;
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,8 +59,10 @@ public class ItemService {
 		return itemDAO.getItem(itemId);
 	}
 	
-	public List<ItemBean> getByCategory(Integer categoryId)
+
+	public List<ItemBean> findByCategoryCategoryId(Integer categoryId)
 	{
-		return itemDAO.getByCategory(categoryId);
+		return itemDAO.findByCategoryCategoryId(categoryId);
 	}
+	
 }

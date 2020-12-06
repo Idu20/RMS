@@ -46,9 +46,9 @@ public class ItemDAO {
 		return null;
 	}
 	
-	public List<ItemBean> getByCategory(Integer categoryId)
+	public List<ItemBean> findByCategoryCategoryId(Integer categoryId)
 	{
-		List<ItemEntity> lst = repo.getByCategory(categoryId);
+		List<ItemEntity> lst = repo.findByCategoryCategoryId(categoryId);
 		List<ItemBean> returnlst = new ArrayList<ItemBean>();
 		for(ItemEntity Item : lst)
 			returnlst.add(Item.convertToBean());
