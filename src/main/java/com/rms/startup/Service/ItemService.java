@@ -57,4 +57,9 @@ public class ItemService {
 	{
 		return itemDAO.getItem(itemId);
 	}
+	
+	public List<ItemBean> getByCategory(Integer categoryId)
+	{
+		return itemDAO.getByCategory(categoryId);
+	}
 }

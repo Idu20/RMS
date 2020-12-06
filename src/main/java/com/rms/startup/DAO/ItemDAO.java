@@ -45,4 +45,13 @@ public class ItemDAO {
 			return repo.findById(itemId).get().convertToBean();
 		return null;
 	}
+	
+	public List<ItemBean> getByCategory(Integer categoryId)
+	{
+		List<ItemEntity> lst = repo.getByCategory(categoryId);
+		List<ItemBean> returnlst = new ArrayList<ItemBean>();
+		for(ItemEntity Item : lst)
+			returnlst.add(Item.convertToBean());
+		return returnlst;
+	}
 }

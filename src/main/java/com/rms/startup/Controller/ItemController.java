@@ -46,4 +46,10 @@ public class ItemController {
 	public String updateItem(@RequestBody ItemBean bean) {
 		return itemService.updateItem(bean);
 	}
+	
+	@GetMapping("/getByCategory/{categoryId}")
+	public List<ItemBean> getByCategory(@PathVariable Integer categoryId)
+	{
+		return itemService.getByCategory(categoryId);
+	}
 }
