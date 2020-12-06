@@ -1,5 +1,6 @@
 package com.rms.startup.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.rms.startup.Messages;
 import com.rms.startup.Bean.ItemBean;
 import com.rms.startup.DAO.ItemDAO;
+import com.rms.startup.Entities.ItemEntity;
 
 @Service
 public class ItemService {
@@ -57,4 +59,10 @@ public class ItemService {
 	{
 		return itemDAO.getItem(itemId);
 	}
+	
+	public List<ItemBean> findByCategoryCategoryId(Integer categoryId)
+	{
+		return itemDAO.findByCategoryCategoryId(categoryId);
+	}
+	
 }
