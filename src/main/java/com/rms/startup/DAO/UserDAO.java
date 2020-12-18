@@ -9,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.rms.startup.Bean.UserBean;
+import com.rms.startup.Bean.UserTypeBean;
 import com.rms.startup.DAO.JPA.UserRepository;
-import com.rms.startup.Entities.UserEntity;;
+import com.rms.startup.Entities.UserEntity;
+import com.rms.startup.Entities.UserTypeEntity;;
 
 @Repository
 @Transactional
@@ -21,6 +23,15 @@ public class UserDAO {
 
 	public List<UserBean> getAllUser() {
 		List<UserEntity> lst = repo.findAll();
+		List<UserBean> returnLst = new ArrayList<UserBean>();
+		for (UserEntity list : lst)
+			returnLst.add(list.convertToBean());
+		return returnLst;
+	}
+	
+	public List<UserBean> getByUserType(UserTypeBean userType)
+	{
+		List<UserEntity> lst = repo.findByUsertype(new UserTypeEntity(userType));
 		List<UserBean> returnLst = new ArrayList<UserBean>();
 		for (UserEntity list : lst)
 			returnLst.add(list.convertToBean());

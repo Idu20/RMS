@@ -46,6 +46,14 @@ public class OrderDAO {
 		return null;
 	}
 	
+	public List<OrderBean> getActiveOrders() {
+		List<OrderEntity> lst = repo.findByIsComplete(0);
+		List<OrderBean> returnlst = new ArrayList<OrderBean>();
+		for(OrderEntity Order : lst)
+			returnlst.add(Order.convertToBean());
+		return returnlst;
+	}
+	
 	public String findByCustomerSittingId(Integer customerSittingId)
 	{
 		return repo.findCustomerSitting(customerSittingId);

@@ -63,5 +63,8 @@ public class OrderService {
 		return orderDAO.findByCustomerSittingId(customerSittingId);
 	}
 	
+	public List<OrderBean> getActiveOrders() {
+		return orderDAO.getActiveOrders();
+	}
 	
 }

@@ -27,6 +27,9 @@ public class OrderEntity implements Serializable {
 
 	@Column(name="ordertotal")
 	private float orderTotal;
+	
+	@Column(name="iscomplete")
+	private int isComplete;
 
 	//bi-directional many-to-one association to Customersitting
 	@ManyToOne
@@ -47,6 +50,7 @@ public class OrderEntity implements Serializable {
 		this.orderDiscount = bean.getOrderDiscount();
 		this.orderTotal = bean.getOrderTotal();
 		this.customersitting = new CustomerSittingEntity(bean.getCustomersitting());
+		this.isComplete = bean.getIsComplete();
 	}
 	
 	public OrderBean convertToBean()
@@ -57,9 +61,19 @@ public class OrderEntity implements Serializable {
 		bean.setOrderDiscount(this.orderDiscount);
 		bean.setOrderTotal(this.orderTotal);
 		bean.setCustomersitting(this.customersitting.convertToBean());
+		bean.setIsComplete(this.isComplete);
 		return bean;
 		
 	}
+	
+	public int getIsComplete() {
+		return isComplete;
+	}
+
+	public void setIsComplete(int isComplete) {
+		this.isComplete = isComplete;
+	}
+
 
 	public String getOrderId() {
 		return this.orderId;

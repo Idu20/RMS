@@ -9,6 +9,7 @@ public class OrderBean {
 	private Date orderDate;
 	private float orderDiscount;
 	private float orderTotal;
+	private int isComplete;
 	private CustomerSittingBean customersitting;
 	
 	public String getOrderId() {
@@ -49,6 +50,14 @@ public class OrderBean {
 
 	public void setCustomersitting(CustomerSittingBean customersitting) {
 		this.customersitting = customersitting;
+	}
+
+	public int getIsComplete() {
+		return isComplete;
+	}
+
+	public void setIsComplete(int isComplete) {
+		this.isComplete = isComplete;
 	}
 
 

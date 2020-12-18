@@ -24,6 +24,7 @@ public class UserTypeDAO {
 		return returnlst;
 	}
 	
+	
 	public void addUserType(UserTypeBean userType)
 	{
 		repo.save(new UserTypeEntity(userType));

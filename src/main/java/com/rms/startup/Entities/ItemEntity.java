@@ -28,7 +28,7 @@ public class ItemEntity implements Serializable{
 	@Column(name="itemdescription")
 	private String itemDescription;
 	@Column(name="itemprice")
-	private String itemPrice;
+	private float itemPrice;
 	@ManyToOne
 	@JoinColumn(name="categoryid")
 	private CategoryEntity category;
@@ -79,10 +79,10 @@ public class ItemEntity implements Serializable{
 	public void setItemName(String itemName) {
 		this.itemName = itemName;
 	}
-	public String getItemPrice() {
+	public float getItemPrice() {
 		return itemPrice;
 	}
-	public void setItemPrice(String itemPrice) {
+	public void setItemPrice(float itemPrice) {
 		this.itemPrice = itemPrice;
 	}
 	

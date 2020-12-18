@@ -47,10 +47,16 @@ public class OrderedItemsController {
 		return orderedItemsService.updateOrderedItems(bean);
 	}
 	
+	@GetMapping("/order/details/{orderId}")
+	public List<OrderedItemsBean> viewOrderByOrderId(@PathVariable String orderId)
+	{
+		return orderedItemsService.findByOrderId(orderId);
+	}
+	
 	@GetMapping("/order/{tableId}")
 	public List<OrderedItemsBean> viewOrder(@PathVariable Integer tableId)
 	{
-		return orderedItemsService.findByOrderId(tableId);
+		return orderedItemsService.findByTableId(tableId);
 	}
 	
 }

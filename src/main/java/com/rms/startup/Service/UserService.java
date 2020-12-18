@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.rms.startup.AES;
 import com.rms.startup.Messages;
 import com.rms.startup.Bean.UserBean;
 import com.rms.startup.DAO.UserDAO;
@@ -14,14 +15,23 @@ public class UserService {
 
 	@Autowired
 	UserDAO userDAO;
+	@Autowired
+	UserTypeService userTypeService;
 
 	public List<UserBean> getAllUser() {
 		return userDAO.getAllUser();
 	}
+	
+	public List<UserBean> getByUserType(Integer userTypeId) {
+		return userDAO.getByUserType(userTypeService.getUserType(userTypeId));
+	}
+	
 
 	public String addUser(UserBean bean) {
 		if (userDAO.getUser(bean.getMobileNumber()) == null) {
+			bean.setPassword(AES.encrypt(bean.getPassword()));
 			userDAO.addUser(bean);
+			System.out.println(AES.decrypt(bean.getPassword()));
 			return Messages.added;
 		}
 		return Messages.notAdded;
@@ -52,6 +62,15 @@ public class UserService {
 			
 	}
 
+	
+	public boolean validateUser(String mobileNumber,String password)
+	{
+		if (userDAO.getUser(mobileNumber).getPassword().equals(password))
+			return true;
+		else
+			return false;
+	}
+	
 	public boolean validateUser(UserBean bean) {
 		if (userDAO.getUser(bean.getMobileNumber()).getPassword().equals(bean.getPassword()))
 			return true;

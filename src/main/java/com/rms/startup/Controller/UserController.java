@@ -2,6 +2,7 @@ package com.rms.startup.Controller;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rms.startup.Bean.UserBean;
@@ -26,6 +28,12 @@ public class UserController {
 	public List<UserBean> showData()
 	{
 		return userService.getAllUser();
+	}
+	
+	@GetMapping("/type/{userTypeId}")
+	public List<UserBean> getByUserType(@PathVariable Integer userTypeId)
+	{
+		return userService.getByUserType(userTypeId);
 	}
 
 	@PostMapping("/add")
@@ -52,14 +60,25 @@ public class UserController {
 		return userService.updateUser(mobileNumber,bean);
 	}
 	
+//	@PostMapping("/login")
+//	public String logIn(@RequestBody UserBean bean)
+//	{
+//		if(userService.validateUser(bean))
+//			return "Success";
+//		else
+//			return "Fail";
+//	}
+	
 	@PostMapping("/login")
-	public String logIn(@RequestBody UserBean bean)
+	public String logIn(@RequestParam String mobileNumber,@RequestParam String password)
 	{
-		if(userService.validateUser(bean))
-			return "Success";
+		if(userService.validateUser(mobileNumber,password))
+			return "success";
 		else
 			return "Fail";
 	}
+	
+	
 //	@GetMapping("/logInList")
 //	public List<Map<String, Object>> show()
 //	{

@@ -37,6 +37,11 @@ public class OrderController {
 		return orderService.getOrder(orderId);
 	}
 
+	@GetMapping("/active")
+	public List<OrderBean> getActiveOrder() {
+		return orderService.getActiveOrders();
+	}
+	
 	@DeleteMapping("/delete/{orderId}")
 	public String deleteOrder(@PathVariable String orderId) {
 		return orderService.deleteOrder(orderId);
@@ -46,4 +51,5 @@ public class OrderController {
 	public String updateOrder(@RequestBody OrderBean bean) {
 		return orderService.updateOrder(bean);
 	}
+	
 }

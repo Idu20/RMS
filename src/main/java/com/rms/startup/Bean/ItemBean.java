@@ -4,7 +4,7 @@ public class ItemBean {
 	private int itemId;
 	private String itemName;
 	private String itemDescription;
-	private String itemPrice;
+	private float itemPrice;
 	private CategoryBean category;
 	public int getItemId() {
 		return itemId;
@@ -30,10 +30,10 @@ public class ItemBean {
 	public void setItemName(String itemName) {
 		this.itemName = itemName;
 	}
-	public String getItemPrice() {
+	public float getItemPrice() {
 		return itemPrice;
 	}
-	public void setItemPrice(String itemPrice) {
+	public void setItemPrice(float itemPrice) {
 		this.itemPrice = itemPrice;
 	}
 
