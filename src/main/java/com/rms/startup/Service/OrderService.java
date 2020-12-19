@@ -1,6 +1,8 @@
 package com.rms.startup.Service;
 
+import java.util.Date;
 import java.util.List;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +16,8 @@ public class OrderService {
 
 	@Autowired
 	OrderDAO orderDAO;
+	@Autowired
+	CustomerSittingService customerSittingService;
 
 	public List<OrderBean> getAllOrders() {
 		return orderDAO.getAllOrders();
@@ -56,6 +60,18 @@ public class OrderService {
 	public OrderBean getOrder(String orderId)
 	{
 		return orderDAO.getOrder(orderId);
+	}
+
+	public void createOrder(Integer customerSittingId)
+	{
+		OrderBean order = new OrderBean();
+		order.setOrderId("Order " + new Date().toString());
+		order.setOrderDate(new Date());
+		order.setCustomersitting(customerSittingService.getCustomerSitting(customerSittingId));
+		order.setIsComplete(0);
+		order.setOrderDiscount(0);
+		order.setOrderTotal(0);
+		addOrder(order);
 	}
 	
 	public String findByCustomerSittingId(Integer customerSittingId)

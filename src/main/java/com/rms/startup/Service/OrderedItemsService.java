@@ -87,7 +87,15 @@ public class OrderedItemsService {
 	{
 		Integer customerSittingId = customerSittingService.findByTableId(tableId);
 		String orderId = orderService.findByCustomerSittingId(customerSittingId);
-		return orderedItemsDAO.findByOrderId(orderId);
+		if(orderId == null)
+		{
+			orderService.createOrder(customerSittingId);
+			return null;
+		}
+		else
+		{
+			return orderedItemsDAO.findByOrderId(orderId);
+		}
 	}
 	
 	

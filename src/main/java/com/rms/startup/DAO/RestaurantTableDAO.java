@@ -24,6 +24,17 @@ public class RestaurantTableDAO {
 		return returnlst;
 	}
 	
+
+	public List<RestaurantTableBean> getAllOccupiedRestaurantTables() {
+		List<RestaurantTableEntity> lst = repo.findByOccupied((byte)1);
+		List<RestaurantTableBean> returnlst = new ArrayList<RestaurantTableBean>();
+		for(RestaurantTableEntity RestaurantTable : lst)
+			returnlst.add(RestaurantTable.convertToBean());
+		return returnlst;
+	}
+	
+
+	
 	public void addRestaurantTable(RestaurantTableBean restaurantTable)
 	{
 		repo.save(new RestaurantTableEntity(restaurantTable));
