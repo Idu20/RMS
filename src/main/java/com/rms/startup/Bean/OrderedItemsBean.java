@@ -5,8 +5,8 @@ public class OrderedItemsBean{
 
 	private Integer orderedItemsId;
 	private String instruction;
-	private int quantity;
-	private int status;
+	private Integer quantity;
+	private Integer status;
 	private ItemBean item;
 	private OrderBean order;
 	
@@ -22,11 +22,11 @@ public class OrderedItemsBean{
 		this.instruction = instruction;
 	}
 
-	public int getQuantity() {
+	public Integer getQuantity() {
 		return this.quantity;
 	}
 
-	public void setQuantity(int quantity) {
+	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
 
