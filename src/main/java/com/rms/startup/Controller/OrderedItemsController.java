@@ -35,10 +35,10 @@ public class OrderedItemsController {
 	}
 	
 	@PutMapping("/update/quantity")
-	public String updateQuantity(HttpServletRequest request)
+	public String updateQuantity(@RequestBody OrderedItemsBean bean)
 	{
-		int orderedItemsId = Integer.parseInt(request.getParameter("orderedItemsId"));
-		int quantity = Integer.parseInt(request.getParameter("quantity"));
+		int orderedItemsId = bean.getOrderedItemsId();
+		int quantity = bean.getQuantity();
 		return orderedItemsService.updateQuantity(orderedItemsId,quantity);
 	}
 
