@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rms.startup.Bean.OrderedItemsBean;
@@ -33,11 +34,9 @@ public class OrderedItemsController {
 	}
 	
 	@PutMapping("/update/quantity")
-	public String updateQuantity(@RequestBody OrderedItemsBean bean)
+	public String updateQuantity(@RequestParam String orderedItemsId, @RequestParam String quantity)
 	{
-		int orderedItemsId = bean.getOrderedItemsId();
-		int quantity = bean.getQuantity();
-		return orderedItemsService.updateQuantity(orderedItemsId,quantity);
+		return orderedItemsService.updateQuantity(Integer.parseInt(orderedItemsId),Integer.parseInt(quantity));
 	}
 
 	@GetMapping("/show/{orderedItemsId}")
