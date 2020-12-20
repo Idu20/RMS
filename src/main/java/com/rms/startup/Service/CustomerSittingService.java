@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.rms.startup.Messages;
 import com.rms.startup.Bean.CustomerSittingBean;
+import com.rms.startup.Bean.RestaurantTableBean;
 import com.rms.startup.DAO.CustomerSittingDAO;
 
 @Service
@@ -14,6 +15,11 @@ public class CustomerSittingService {
 
 	@Autowired
 	CustomerSittingDAO customerSittingDAO;
+	@Autowired
+	WaitingListService waitingListService;
+	@Autowired
+	RestaurantTableService restaurantTableService;
+	
 
 	public List<CustomerSittingBean> getAllCustomerSittings() {
 		return customerSittingDAO.getAllCustomerSittings();
@@ -23,7 +29,11 @@ public class CustomerSittingService {
 	public String addCustomerSitting(CustomerSittingBean customerSitting){
 		if(customerSittingDAO.getCustomerSitting(customerSitting.getCustomerSittingId()) == null)
 		{
+			waitingListService.deleteWaitingList(waitingListService.getWaitingNumber(customerSitting.getCustomer().getMobileNumber()));
 			customerSittingDAO.addCustomerSitting(customerSitting);
+			RestaurantTableBean restaurantTableBean = restaurantTableService.getRestaurantTable(customerSitting.getRestauranttable().getTableId());
+			restaurantTableBean.setOccupied((byte)1);
+			restaurantTableService.updateRestaurantTable(restaurantTableBean);
 			return Messages.added;
 		}
 		return Messages.alreadyExist;

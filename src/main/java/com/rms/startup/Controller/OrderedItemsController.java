@@ -2,6 +2,8 @@ package com.rms.startup.Controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,6 +33,14 @@ public class OrderedItemsController {
 	public String addOrderedItems(@RequestBody OrderedItemsBean bean) {
 		return orderedItemsService.addOrderedItems(bean);
 	}
+	
+	@PutMapping("/update/quantity")
+	public String updateQuantity(HttpServletRequest request)
+	{
+		int orderedItemsId = Integer.parseInt(request.getParameter("orderedItemsId"));
+		int quantity = Integer.parseInt(request.getParameter("quantity"));
+		return orderedItemsService.updateQuantity(orderedItemsId,quantity);
+	}
 
 	@GetMapping("/show/{orderedItemsId}")
 	public OrderedItemsBean getOrderedItems(@PathVariable Integer orderedItemsId) {
@@ -42,11 +52,11 @@ public class OrderedItemsController {
 		return orderedItemsService.deleteOrderedItems(orderedItemsId);
 	}
 
-	@PutMapping("/update")
-	public String updateOrderedItems(@RequestBody OrderedItemsBean bean) {
-		return orderedItemsService.updateOrderedItems(bean);
-	}
-	
+//	@PutMapping("/update")
+//	public String updateOrderedItems(@RequestBody OrderedItemsBean bean) {
+//		return orderedItemsService.updateOrderedItems(bean);
+//	}
+//	
 	@GetMapping("/order/details/{orderId}")
 	public List<OrderedItemsBean> viewOrderByOrderId(@PathVariable String orderId)
 	{

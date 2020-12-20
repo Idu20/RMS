@@ -24,6 +24,10 @@ public class RestaurantTableService {
 		return restaurantTableDAO.getAllOccupiedRestaurantTables();
 	}
 	
+	public List<RestaurantTableBean> getAllAvailableRestaurantTables() {
+		return restaurantTableDAO.getAllAvailableRestaurantTables();
+	}
+	
 	
 	public String addRestaurantTable(RestaurantTableBean restaurantTable){
 		if(restaurantTableDAO.getRestaurantTable(restaurantTable.getTableId()) == null)

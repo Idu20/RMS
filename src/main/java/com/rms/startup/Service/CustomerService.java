@@ -37,7 +37,10 @@ public class CustomerService {
 	}
 
 	public CustomerBean getCustomer(String mobileNumber) {
-		return customerDAO.getCustomer(mobileNumber);
+		if(customerDAO.customerExists(mobileNumber))
+			return customerDAO.getCustomer(mobileNumber);
+		else
+			return null;
 	}
 
 	public String updateCustomer(String mobileNumber, CustomerBean bean) {

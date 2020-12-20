@@ -36,6 +36,11 @@ public class RestaurantTableController {
 	public List<RestaurantTableBean> getOccupiedTables() {
 		return restaurantTableService.getAllOccupiedRestaurantTables();
 	}
+	
+	@GetMapping("/show/available")
+	public List<RestaurantTableBean> getAvailableTables() {
+		return restaurantTableService.getAllAvailableRestaurantTables();
+	}
 
 	@GetMapping("/show/{restaurantTableId}")
 	public RestaurantTableBean getRestaurantTable(@PathVariable Integer restaurantTableId) {

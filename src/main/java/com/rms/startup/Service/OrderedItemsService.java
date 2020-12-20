@@ -26,6 +26,11 @@ public class OrderedItemsService {
 		return orderedItemsDAO.getAllOrderedItemss();
 	}
 	
+	public String updateQuantity(int orderedItemsId,int quantity){
+		OrderedItemsBean orderedItems = getOrderedItems(orderedItemsId);
+		orderedItems.setQuantity(quantity);
+		return updateOrderedItems(orderedItems);
+	}
 	
 	public String addOrderedItems(OrderedItemsBean orderedItems){
 		if(orderedItemsDAO.getOrderedItems(orderedItems.getOrderedItemsId()) == null)
@@ -39,6 +44,8 @@ public class OrderedItemsService {
 		return Messages.alreadyExist;
 			
 	}
+	
+	
 	
 	public String updateOrderedItems(OrderedItemsBean orderedItems){
 		if(orderedItemsDAO.getOrderedItems(orderedItems.getOrderedItemsId()) != null)

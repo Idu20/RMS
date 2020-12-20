@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.rms.startup.Bean.CustomerBean;
 import com.rms.startup.Bean.WaitingListBean;
 import com.rms.startup.DAO.JPA.WaitingListRepository;
 import com.rms.startup.Entities.CustomerEntity;
@@ -48,8 +49,9 @@ public class WaitingListDAO {
 		repo.save(u);
 	}
 	
-	public List<WaitingListBean> findCustomer(CustomerEntity customerEntity)
+	public List<WaitingListBean> findCustomer(CustomerBean customerBean)
 	{
+		CustomerEntity customerEntity = new CustomerEntity(customerBean);
 		List<WaitingListEntity> lst = repo.findByCustomer(customerEntity);
 		List<WaitingListBean> returnLst = new ArrayList<>();
 		for (WaitingListEntity list : lst)

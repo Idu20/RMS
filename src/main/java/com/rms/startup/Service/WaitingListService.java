@@ -8,9 +8,7 @@ import org.springframework.stereotype.Service;
 import com.rms.startup.Messages;
 import com.rms.startup.Bean.CustomerBean;
 import com.rms.startup.Bean.WaitingListBean;
-import com.rms.startup.DAO.CustomerDAO;
 import com.rms.startup.DAO.WaitingListDAO;
-import com.rms.startup.Entities.CustomerEntity;
 
 @Service
 public class WaitingListService {
@@ -19,16 +17,25 @@ public class WaitingListService {
 	WaitingListDAO dao;
 
 	@Autowired
-	CustomerDAO customerDAO;
+	CustomerService customerService;
 
 	public List<WaitingListBean> getAllWaitingList() {
 		return dao.getAllWaitingList();
 	}
 
 	public String addWaitingList(WaitingListBean bean) {
-		CustomerBean customerBean = customerDAO.getCustomer(bean.getCustomerBean().getMobileNumber());
-		CustomerEntity entity = new CustomerEntity(customerBean);
-		if (dao.findCustomer(entity).size() == 0) {
+		CustomerBean customerBean;
+		if(customerService.getCustomer(bean.getCustomerBean().getMobileNumber()) != null) {
+			customerBean = customerService.getCustomer(bean.getCustomerBean().getMobileNumber());	
+		}
+		else {
+			customerBean = new CustomerBean();
+			customerBean.setMobileNumber(bean.getCustomerBean().getMobileNumber());
+			customerBean.setCustomerName(bean.getCustomerBean().getCustomerName());
+			customerBean.setDob(bean.getCustomerBean().getDob());
+			customerService.addCustomer(customerBean);
+		}
+		if (dao.findCustomer(customerBean).size() == 0) {
 			dao.addWaitingList(bean);
 			return Messages.added;
 		}
@@ -39,6 +46,11 @@ public class WaitingListService {
 	public String deleteWaitingList(Integer waitingNumber) {
 		dao.deleteWaitingList(waitingNumber);
 		return Messages.deleted;
+	}
+	
+	public int getWaitingNumber(String mobileNumber)
+	{
+		return dao.findCustomer(customerService.getCustomer(mobileNumber)).get(0).getWaitingNumber();
 	}
 
 	public WaitingListBean getWaitingList(Integer waitingNumber) {
