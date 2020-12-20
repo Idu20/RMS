@@ -21,6 +21,9 @@ public class OrderedItemsService {
 	
 	@Autowired
 	OrderService orderService;
+	
+	@Autowired
+	ItemService itemService;
 
 	public List<OrderedItemsBean> getAllOrderedItemss() {
 		return orderedItemsDAO.getAllOrderedItemss();
@@ -105,5 +108,19 @@ public class OrderedItemsService {
 		}
 	}
 	
+	
+	public String addOrderedItems(Integer tableId,Integer quantity,Integer itemId,String instruction)
+	{
+		Integer customerSittingId = customerSittingService.findByTableId(tableId);
+		String orderId = orderService.findByCustomerSittingId(customerSittingId);
+		OrderedItemsBean bean = new OrderedItemsBean();
+		bean.setInstruction(instruction);
+		bean.setItem(itemService.getItem(itemId));
+		bean.setOrder(orderService.getOrder(orderId));
+		bean.setQuantity(quantity);
+		bean.setStatus(0);
+		return addOrderedItems(bean);
+		
+	}
 	
 }

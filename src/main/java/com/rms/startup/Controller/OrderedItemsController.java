@@ -27,16 +27,15 @@ public class OrderedItemsController {
 	public List<OrderedItemsBean> showData() {
 		return orderedItemsService.getAllOrderedItemss();
 	}
-	
+
 	@PostMapping("/add")
 	public String addOrderedItems(@RequestBody OrderedItemsBean bean) {
 		return orderedItemsService.addOrderedItems(bean);
 	}
-	
+
 	@PutMapping("/update/quantity")
-	public String updateQuantity(@RequestParam String orderedItemsId, @RequestParam String quantity)
-	{
-		return orderedItemsService.updateQuantity(Integer.parseInt(orderedItemsId),Integer.parseInt(quantity));
+	public String updateQuantity(@RequestParam String orderedItemsId, @RequestParam String quantity) {
+		return orderedItemsService.updateQuantity(Integer.parseInt(orderedItemsId), Integer.parseInt(quantity));
 	}
 
 	@GetMapping("/show/{orderedItemsId}")
@@ -55,15 +54,20 @@ public class OrderedItemsController {
 //	}
 //	
 	@GetMapping("/order/details/{orderId}")
-	public List<OrderedItemsBean> viewOrderByOrderId(@PathVariable String orderId)
-	{
+	public List<OrderedItemsBean> viewOrderByOrderId(@PathVariable String orderId) {
 		return orderedItemsService.findByOrderId(orderId);
 	}
-	
+
 	@GetMapping("/order/{tableId}")
-	public List<OrderedItemsBean> viewOrder(@PathVariable Integer tableId)
-	{
+	public List<OrderedItemsBean> viewOrder(@PathVariable Integer tableId) {
 		return orderedItemsService.findByTableId(tableId);
 	}
-	
+
+	@PostMapping("/items/add")
+	public String addOrderedItems(@RequestParam String tableId, @RequestParam String quantity,
+			@RequestParam String itemId, @RequestParam String instruction) {
+		return orderedItemsService.addOrderedItems(Integer.parseInt(tableId), Integer.parseInt(quantity),
+				Integer.parseInt(itemId), instruction);
+	}
+
 }
