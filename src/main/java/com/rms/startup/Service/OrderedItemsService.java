@@ -84,7 +84,10 @@ public class OrderedItemsService {
 	
 	public OrderedItemsBean getOrderedItems(Integer orderedItemsId)
 	{
-		return orderedItemsDAO.getOrderedItems(orderedItemsId);
+		if(orderedItemsDAO.isExist(orderedItemsId))
+			return orderedItemsDAO.getOrderedItems(orderedItemsId);
+		else
+			return null;
 	}
 	
 
@@ -119,6 +122,7 @@ public class OrderedItemsService {
 		bean.setOrder(orderService.getOrder(orderId));
 		bean.setQuantity(quantity);
 		bean.setStatus(0);
+		bean.setOrderedItemsId(0);
 		return addOrderedItems(bean);
 		
 	}

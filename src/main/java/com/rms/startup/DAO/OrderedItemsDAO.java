@@ -24,6 +24,12 @@ public class OrderedItemsDAO {
 		return returnlst;
 	}
 	
+	public boolean isExist(Integer orderedItemsId)
+	{
+		return repo.existsById(orderedItemsId);
+	}
+	
+	
 	public void addOrderedItems(OrderedItemsBean orderedItems)
 	{
 		repo.save(new OrderedItemsEntity(orderedItems));
