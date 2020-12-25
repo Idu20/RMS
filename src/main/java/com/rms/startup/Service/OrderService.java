@@ -74,6 +74,13 @@ public class OrderService {
 		addOrder(order);
 	}
 	
+	public String completeOrder(String orderId)
+	{
+		OrderBean order = getOrder(orderId);
+		order.setIsComplete(1);
+		return updateOrder(order);
+	}
+	
 	public String findByCustomerSittingId(Integer customerSittingId)
 	{
 		return orderDAO.findByCustomerSittingId(customerSittingId);

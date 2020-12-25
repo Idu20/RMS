@@ -52,4 +52,9 @@ public class OrderController {
 		return orderService.updateOrder(bean);
 	}
 	
+	@PutMapping("/update")
+	public String completeOrder(@PathVariable String orderId) {
+		return orderService.completeOrder(orderId);
+	}
+	
 }
