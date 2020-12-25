@@ -62,7 +62,7 @@ public class ItemService {
 
 	public List<ItemBean> findByCategoryCategoryId(Integer categoryId)
 	{
-		return itemDAO.findByCategoryCategoryId(categoryId);
+		return itemDAO.findByCategoryId(categoryId);
 	}
 	
 }

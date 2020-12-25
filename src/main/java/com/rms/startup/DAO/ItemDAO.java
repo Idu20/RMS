@@ -46,7 +46,7 @@ public class ItemDAO {
 		return null;
 	}
 	
-	public List<ItemBean> findByCategoryCategoryId(Integer categoryId)
+	public List<ItemBean> findByCategoryId(Integer categoryId)
 	{
 		List<ItemEntity> lst = repo.findByCategoryCategoryId(categoryId);
 		List<ItemBean> returnlst = new ArrayList<ItemBean>();

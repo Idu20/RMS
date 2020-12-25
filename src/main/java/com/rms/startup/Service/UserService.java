@@ -71,10 +71,4 @@ public class UserService {
 			return false;
 	}
 	
-	public boolean validateUser(UserBean bean) {
-		if (userDAO.getUser(bean.getMobileNumber()).getPassword().equals(bean.getPassword()))
-			return true;
-		else
-			return false;
-	}
 }
