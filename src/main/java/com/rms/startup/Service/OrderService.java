@@ -81,6 +81,7 @@ public class OrderService {
 		return updateOrder(order);
 	}
 	
+	
 	public String findByCustomerSittingId(Integer customerSittingId)
 	{
 		return orderDAO.findByCustomerSittingId(customerSittingId);

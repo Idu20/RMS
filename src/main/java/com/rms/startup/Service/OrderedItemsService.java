@@ -48,7 +48,12 @@ public class OrderedItemsService {
 			
 	}
 	
-	
+	public String changeStatus(Integer orderedItemsId)
+	{
+		OrderedItemsBean order = getOrderedItems(orderedItemsId);
+		order.setStatus(1);
+		return updateOrderedItems(order);
+	}
 	
 	public String updateOrderedItems(OrderedItemsBean orderedItems){
 		if(orderedItemsDAO.getOrderedItems(orderedItems.getOrderedItemsId()) != null)

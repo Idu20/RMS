@@ -48,11 +48,11 @@ public class OrderedItemsController {
 		return orderedItemsService.deleteOrderedItems(orderedItemsId);
 	}
 
-//	@PutMapping("/update")
-//	public String updateOrderedItems(@RequestBody OrderedItemsBean bean) {
-//		return orderedItemsService.updateOrderedItems(bean);
-//	}
-//	
+	@PutMapping("/update/complete/{orderedItemsId}")
+	public String changeStatus(@PathVariable Integer orderedItemsId) {
+		return orderedItemsService.changeStatus(orderedItemsId);
+	}
+	
 	@GetMapping("/order/details/{orderId}")
 	public List<OrderedItemsBean> viewOrderByOrderId(@PathVariable String orderId) {
 		return orderedItemsService.findByOrderId(orderId);

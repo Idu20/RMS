@@ -52,7 +52,7 @@ public class OrderController {
 		return orderService.updateOrder(bean);
 	}
 	
-	@PutMapping("/update")
+	@PutMapping("/update/complete/{orderId}")
 	public String completeOrder(@PathVariable String orderId) {
 		return orderService.completeOrder(orderId);
 	}
