@@ -60,14 +60,14 @@ public class UserController {
 		return userService.updateUser(mobileNumber,bean);
 	}
 	
-//	@PostMapping("/login")
-//	public String logIn(@RequestBody UserBean bean)
-//	{
-//		if(userService.validateUser(bean))
-//			return "Success";
-//		else
-//			return "Fail";
-//	}
+	@PostMapping("/loginweb")
+	public String logIn(@RequestBody UserBean bean)
+	{
+		if(userService.validateUser(bean))
+			return "Success";
+		else
+			return "Fail";
+	}
 	
 	@PostMapping("/login")
 	public String logIn(@RequestParam String mobileNumber,@RequestParam String password)

@@ -52,6 +52,17 @@ public class OrderedItemsDAO {
 		return null;
 	}
 	
+	public List<OrderedItemsBean> getPendingOrders()
+	{
+		List<OrderedItemsEntity> lst = repo.findByStatus(0);
+		List<OrderedItemsBean> returnlst = new ArrayList<OrderedItemsBean>();
+		for(OrderedItemsEntity OrderedItems : lst)
+			returnlst.add(OrderedItems.convertToBean());
+		return returnlst;
+		
+	}
+	
+	
 	public List<OrderedItemsBean> findByOrderId(String orderId)
 	{
 		List<OrderedItemsEntity> lst = repo.findOrder(orderId);

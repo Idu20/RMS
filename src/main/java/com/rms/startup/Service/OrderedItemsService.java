@@ -95,6 +95,10 @@ public class OrderedItemsService {
 			return null;
 	}
 	
+	public List<OrderedItemsBean> getPendingOrders()
+	{
+		return orderedItemsDAO.getPendingOrders();
+	}
 
 	public List<OrderedItemsBean> findByOrderId(String orderId)
 	{

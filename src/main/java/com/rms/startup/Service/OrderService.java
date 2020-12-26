@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.rms.startup.Messages;
 import com.rms.startup.Bean.OrderBean;
+import com.rms.startup.Bean.RestaurantTableBean;
 import com.rms.startup.DAO.OrderDAO;
 
 @Service
@@ -16,6 +17,8 @@ public class OrderService {
 
 	@Autowired
 	OrderDAO orderDAO;
+	@Autowired
+	RestaurantTableService restaurantTableService;
 	@Autowired
 	CustomerSittingService customerSittingService;
 
@@ -66,6 +69,7 @@ public class OrderService {
 	{
 		OrderBean order = new OrderBean();
 		order.setOrderId("Order " + new Date().toString());
+		order.setOrderId(order.getOrderId().replace(" ", "_"));
 		order.setOrderDate(new Date());
 		order.setCustomersitting(customerSittingService.getCustomerSitting(customerSittingId));
 		order.setIsComplete(0);
@@ -78,6 +82,9 @@ public class OrderService {
 	{
 		OrderBean order = getOrder(orderId);
 		order.setIsComplete(1);
+		RestaurantTableBean table = order.getCustomersitting().getRestauranttable();
+		table.setOccupied((byte)0);
+		restaurantTableService.updateRestaurantTable(table);
 		return updateOrder(order);
 	}
 	

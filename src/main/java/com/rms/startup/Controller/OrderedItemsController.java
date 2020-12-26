@@ -57,6 +57,12 @@ public class OrderedItemsController {
 	public List<OrderedItemsBean> viewOrderByOrderId(@PathVariable String orderId) {
 		return orderedItemsService.findByOrderId(orderId);
 	}
+	
+	@GetMapping("/show/pending")
+	public List<OrderedItemsBean> getPendingOrders() {
+		return orderedItemsService.getPendingOrders();
+	}
+	
 
 	@GetMapping("/order/{tableId}")
 	public List<OrderedItemsBean> viewOrder(@PathVariable Integer tableId) {

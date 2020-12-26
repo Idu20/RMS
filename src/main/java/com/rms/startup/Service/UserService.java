@@ -31,7 +31,6 @@ public class UserService {
 		if (userDAO.getUser(bean.getMobileNumber()) == null) {
 			bean.setPassword(AES.encrypt(bean.getPassword()));
 			userDAO.addUser(bean);
-			System.out.println(AES.decrypt(bean.getPassword()));
 			return Messages.added;
 		}
 		return Messages.notAdded;
@@ -62,10 +61,17 @@ public class UserService {
 			
 	}
 
+	public boolean validateUser(UserBean bean)
+	{
+		if (validateUser(bean.getMobileNumber(),bean.getPassword()))
+			return true;
+		else
+			return false;
+	}
 	
 	public boolean validateUser(String mobileNumber,String password)
 	{
-		if (userDAO.getUser(mobileNumber).getPassword().equals(password))
+		if (userDAO.getUser(mobileNumber).getPassword().equals(AES.encrypt(password)))
 			return true;
 		else
 			return false;

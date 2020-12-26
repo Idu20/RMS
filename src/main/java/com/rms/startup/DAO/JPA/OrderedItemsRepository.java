@@ -14,5 +14,6 @@ public interface OrderedItemsRepository extends JpaRepository<OrderedItemsEntity
 	@Query("select o from OrderedItemsEntity o where orderid = ?1")
 	List<OrderedItemsEntity> findOrder(String orderId);
 	
+	List<OrderedItemsEntity> findByStatus(int status);
 	
 }

@@ -32,6 +32,7 @@ public class ItemService {
 	}
 	
 	public String updateItem(ItemBean item){
+		System.out.println(item.getItemId());
 		if(itemDAO.getItem(item.getItemId()) != null)
 		{
 			itemDAO.updateItem(item);
